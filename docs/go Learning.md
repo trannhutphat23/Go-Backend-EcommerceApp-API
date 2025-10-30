@@ -17,3 +17,38 @@ gin.Logger() và gin.Recovery() là 2 middleware
 + gin.Recovery(): Bắt lỗi panic trong quá trình xử lý request, ngăn server bị crash, và trả về lỗi 500
 
 gin.H : kiểu dữ liệu tiện lợi để tạo JSON Object, alias cho kiểu map[string]interface{} (type H map[string]interface{}) => map có key là chuỗi và value là bất kỳ kiểu dữ liệu nào
+
+### GIN vs Router
+### GIN vs MVC
+### GIN vs Error
+### GIN vs ZAP
+
+* ZAP:
+Có 3 loại cấu hình logger mặc định chính:
++ zap.NewExample(): minh họa hoặc test đơn giản
++ zap.NewDevelopment(): phát triển (dev mode)
++ zap.NewProduction(): môi trường production / server thật
++ zap.Config{...}.Build(): tự cấu hình logger theo ý muốn
+
+Encoder:
+zap.NewProductionEncoderConfig()
+
+``
+func NewProductionEncoderConfig() zapcore.EncoderConfig {
+    return zapcore.EncoderConfig{
+        TimeKey:        "ts",
+        LevelKey:       "level",
+        NameKey:        "logger",
+        CallerKey:      "caller",
+        MessageKey:     "msg",
+        StacktraceKey:  "stacktrace",
+        LineEnding:     zapcore.DefaultLineEnding,
+        EncodeLevel:    zapcore.LowercaseLevelEncoder,
+        EncodeTime:     zapcore.EpochTimeEncoder,
+        EncodeDuration: zapcore.SecondsDurationEncoder,
+        EncodeCaller:   zapcore.ShortCallerEncoder,
+    }
+}
+``
+
+func NewJSONEncoder(cfg EncoderConfig) Encoder -> hàm tạo

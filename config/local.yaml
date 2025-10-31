@@ -1,1 +1,14 @@
-ok1
+server:
+  port: 8002
+databases:
+  - user: admin
+    password: admin
+    host: localhost
+    dbName: shop
+  - user: order
+    password: order
+    host: localhost
+    dbName: order 
+security:
+  jwt:
+    key: abc123
